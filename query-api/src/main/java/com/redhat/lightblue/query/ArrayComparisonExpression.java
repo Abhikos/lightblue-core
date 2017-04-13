@@ -36,7 +36,15 @@ public abstract class ArrayComparisonExpression extends ComparisonExpression {
     public static ArrayComparisonExpression fromJson(ObjectNode node) {
         JsonNode x = node.get("contains");
         if (x != null) {
+
+            JsonNode y = node.get("array");
+            if(y != null)
             return ArrayContainsExpression.fromJson(node);
+
+            y = node.get("rfield");
+            if(y != null)
+                return ArrayContainsFieldExpression.fromJson(node);
+
         } else {
             x = node.get("elemMatch");
             if (x != null) {
